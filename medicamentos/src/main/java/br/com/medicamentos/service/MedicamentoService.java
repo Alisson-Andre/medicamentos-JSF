@@ -15,16 +15,16 @@ public class MedicamentoService implements Serializable {
 	@Inject
 	private DAO<Medicamento> dao;
 	
-	public void salvar(Medicamento m) throws NegativeArraySizeException {
+	public void salvar(Medicamento m) throws NegocioException {
 		
 		if (m.getNome().length() < 3) {
-			throw new NegocioException("O nome do medicamento não pode ter menos que 3 caracteres")
+			throw new NegocioException("O nome do medicamento não pode ter menos que 3 caracteres");
 		}
 		
 		dao.salvar(m);
 	}
 	
-	public void remover(Medicamento m) throws NegativeArraySizeException {
+	public void remover(Medicamento m) throws NegocioException {
 		dao.remover(Medicamento.class, m.getId());
 	}
 	
