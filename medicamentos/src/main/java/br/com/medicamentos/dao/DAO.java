@@ -16,43 +16,39 @@ public class DAO<T extends Base> implements Serializable {
 	public T buscarPorId(Class<T> clazz, Long id) {
 		return manager.find(clazz, id);
 	}
-	
+
 	public void salvar(T t) {
 		try {
 			manager.getTransaction().begin();
-			
+
 			if (t.getId() == null) {
 				manager.persist(t);
-			}else {
+			} else {
 				manager.merge(t);
 			}
-			
+
 			manager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
-			
-		} finally {
-			manager.close();
+
 		}
 	}
-	
+
 	public void remover(Class<T> clazz, Long id) {
 		T t = buscarPorId(clazz, id);
-		
+
 		try {
 			manager.getTransaction().begin();
-			manager.remove(t);			
+			manager.remove(t);
 			manager.getTransaction().commit();
-			
+
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
-			
-		} finally {
-			manager.close();
+
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<T> buscarTodos(String jpql) {
 		Query query = manager.createQuery(jpql);

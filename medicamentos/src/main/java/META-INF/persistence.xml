@@ -4,6 +4,8 @@
 	
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
+	<class>br.com.medicamentos.model.Medicamento</class>
+	
 	<properties>
 		
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
